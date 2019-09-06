@@ -11,6 +11,8 @@ router.post('/register', (req, res) => {
 
   Users.add(user)
     .then(saved => {
+      // created a session
+      //send back a cookie that corresponds to the session
       res.status(201).json(saved);
     })
     .catch(error => {
@@ -24,6 +26,8 @@ router.post('/login', (req, res) => {
   Users.findBy({ username })
     .first()
     .then(user => {
+      // created a session
+      //send back a cookie that corresponds to the session
       if (user && bcrypt.compareSync(password, user.password)) {
         res.status(200).json({
           message: `Welcome ${user.username}!`,
